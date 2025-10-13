@@ -1,59 +1,54 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>MealScope</title>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href="./styles/styles.css" />
-        <script type="module" src="./js/main.js"></script>
-    </head>
 
-    <body>
-        <header class="header">
-            <div class="logo">
-                <a href="index.html">
-                    <h1>MealScope</h1>
-                </a>
-            </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MealScope</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <script type="module" src="./js/main.js"></script>
+</head>
 
-            <div class="search-bar">
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search recipes..."
-                />
-                <button id="searchBtn">Search</button>
-            </div>
-
-            <nav class="nav-icons">
-                <a href="./favorites.html" title="Favorites"
-                    >⭐ Favorites</a
-                >
-            </nav>
-        </header>
-
-        <main class="main">
-            <aside class="sidebar">
-                <h2>Filters</h2>
-                <div id="categoryList"></div>
-            </aside>
-
-            <section class="recipes" id="recipesContainer"></section>
-        </main>
-
-        <div class="modal" id="recipeModal">
-            <div class="modal-content">
-                <span class="close" id="closeModal">&times;</span>
-                <div id="modalDetails"></div>
-            </div>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>MealScope</h1>
+            </a>
         </div>
 
-        <footer class="footer">
-            <p>&copy; 2025 MealScope. All rights reserved.</p>
-        </footer>
-    </body>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search recipes..." />
+            <button id="searchBtn">Search</button>
+        </div>
+
+        <nav class="nav-icons">
+            <a href="./favorites.html" title="Favorites">⭐ Favorites</a>
+        </nav>
+    </header>
+
+    <main class="main">
+        <aside class="sidebar">
+            <h2>Filters</h2>
+            <div id="categoryList"></div>
+        </aside>
+
+        <section class="recipes" id="recipesContainer"></section>
+    </main>
+
+    <dialog class="modal" id="recipeModal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <div id="modalDetails"></div>
+        </div>
+    </dialog>
+
+    <footer class="footer">
+        <p>&copy; 2025 MealScope. All rights reserved.</p>
+    </footer>
+</body>
+
 </html>

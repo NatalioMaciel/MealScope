@@ -1,5 +1,4 @@
 import { loadFavorites, removeFavorite } from "./utils.js";
-import { recipeCardTemplate } from "./utils.js";
 import { fetchRecipeById } from "./services.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,7 +19,7 @@ function renderFavorites(favorites, container) {
         const card = document.createElement("div");
         card.classList.add("recipe-card");
         card.innerHTML = `
-      ${recipeCardTemplate(recipe)}
+      ${favoriteCardTemplate(recipe)}
       <div class="card-actions">
         <button class="view-btn">View</button>
         <button class="remove-btn">Remove</button>
@@ -45,6 +44,15 @@ function renderFavorites(favorites, container) {
     });
 }
 
+function favoriteCardTemplate(recipe) {
+    return `
+  <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}">
+  <h3>${recipe.strMeal}</h3>
+  <div class="card-actions">
+  </div>
+  `;
+}
+
 async function showFavoriteModal(id) {
     const modal = document.getElementById("recipeModal");
     const modalDetails = document.getElementById("modalDetails");
@@ -56,7 +64,7 @@ async function showFavoriteModal(id) {
         if (!recipe) throw new Error("Recipe not found");
         modalDetails.innerHTML = `
       <h2>${recipe.strMeal}</h2>
-      <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}">
+      <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" width="300" hight="300">
       <p><strong>Category:</strong> ${recipe.strCategory}</p>
       <p><strong>Area:</strong> ${recipe.strArea}</p>
       <p>${recipe.strInstructions}</p>

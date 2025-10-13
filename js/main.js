@@ -1,6 +1,6 @@
-import { fetchRecipes } from "./js/services.js";
-import { renderRecipeList } from "./js/ui.js";
-import { loadFavorites } from "./js/utils.js";
+import { fetchRecipes } from "./services.js";
+import { renderRecipeList } from "./ui.js";
+import { loadFavorites } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const searchBtn = document.getElementById("searchBtn");

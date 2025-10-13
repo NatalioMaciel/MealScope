@@ -1,5 +1,5 @@
 const mealdb_base = "https://www.themealdb.com/api/json/v1/1";
-const apiNutritionKey = import.meta.env.VITE_NUTRITION_API_KEY;
+const nutrition_api_url = "https://api.api-ninjas.com/v1/nutrition";
 
 export async function fetchRecipes(query) {
     try {
@@ -31,10 +31,11 @@ export async function fetchRecipeById(id) {
 
 export async function fetchNutrition(ingredient) {
     const response = await fetch(
-        `https://api.api-ninjas.com/v1/nutrition?query=${ingredient}`,
-        {
-            headers: { "X-Api-Key": apiNutritionKey },
+        `${nutrition_api_url}?query=${encodeURIComponent(query)}`, {
+        headers: {
+            "X-Api-Key": "ydgVSR/ecbUft+FsTHyvSw==B3z7IAqKgkl2LgiQ"
         }
+    }
     );
     if (!response.ok) throw new Error("Failed to fetch nutrition data");
     return response.json();
