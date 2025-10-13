@@ -55,21 +55,20 @@ export async function showModal(recipeId) {
 
         modalDetails.innerHTML = `
       <h2>${recipe.strMeal}</h2>
-      <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}">
+      <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" width="300" hight="300"">
       <p><strong>Category:</strong> ${recipe.strCategory}</p>
       <p><strong>Area:</strong> ${recipe.strArea}</p>
       <p>${recipe.strInstructions}</p>
       <h3>Nutrition Info</h3>
-      ${
-          nutrition && nutrition.length
-              ? `<ul>${nutrition
+      ${nutrition && nutrition.length
+                ? `<ul>${nutrition
                     .map(
                         (n) =>
                             `<li>${n.name}: ${n.calories} kcal, Protein: ${n.protein_g}g, Carbs: ${n.carbohydrates_total_g}g</li>`
                     )
                     .join("")}</ul>`
-              : `<p>Nutrition information not available.</p>`
-      }
+                : `<p>Nutrition information not available.</p>`
+            }
     `;
     } catch (error) {
         modalDetails.innerHTML = `<p>Error loading recipe details. ${error}</p>`;
