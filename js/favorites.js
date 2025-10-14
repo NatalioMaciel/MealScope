@@ -1,5 +1,4 @@
 import { loadFavorites, removeFavorite } from "./utils.js";
-import { fetchRecipeById } from "./services.js";
 import { showModal } from "./ui.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
