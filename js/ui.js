@@ -51,7 +51,12 @@ export async function showModal(recipeId) {
         }
 
         // Fetch nutrition info
-        const nutrition = await fetchNutrition(ingredients.join(", "));
+        let nutrition = [];
+        try {
+            nutrition = await fetchNutrition(ingredients.slice(0, 3).join(", "));
+        } catch {
+            nutrition = null;
+        }
 
         modalDetails.innerHTML = `
       <h2>${recipe.strMeal}</h2>

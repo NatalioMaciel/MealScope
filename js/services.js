@@ -28,21 +28,28 @@ export async function fetchRecipeById(id) {
 }
 
 //Get nutrition info for ingredients
-export async function fetchNutrition(ingredient) {
+export async function fetchNutrition(ingredientList) {
     try {
+        const query = ingredientList; // expected to be a short string like "1 cup rice, 2 eggs"
         const response = await fetch(
-            `${nutrition_api_url}?query=${encodeURIComponent(ingredient)}`,
+            `${nutrition_api_url}?query=${encodeURIComponent(query)}`,
             {
                 headers: {
-                    "X-Api-Key": "ydgVSR/ecbUft+FsTHyvSw==B3z7IAqKgkl2LgiQ"
-                }
+                    "X-Api-Key": "ydgVSR/ecbUft+FsTHyvSw==B3z7IAqKgkl2LgiQ",
+                },
             }
         );
-        if (!response.ok) throw new Error("Failed to fetch nutrition data");
-        return await response.json();
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Nutrition API error: ${errorText}`);
+        }
+
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error("fetchNutrition:", error);
-        throw error;
+        throw new Error("Failed to fetch nutrition data");
     }
 }
 

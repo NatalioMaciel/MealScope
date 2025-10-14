@@ -27,9 +27,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     categorySelect.addEventListener("change", async (e) => {
         const category = e.target.value;
+        recipesContainer.innerHTML = `<p>Loading...</p>`;
         if (category) {
-            const recipes = await fetchByCategory(category);
-            renderRecipes(recipes);
+            const categoriesRecipes = await fetchByCategory(category);
+            renderRecipeList(categoriesRecipes, recipesContainer);
         } else {
             await loadRandomRecipes();
         }
@@ -37,22 +38,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     async function loadRandomRecipes() {
         recipeContainer.innerHTML = "<p>Loading random recipes...</p>";
-        const randoms = [];
-        for (let i = 0; i < 4; i++) {
-            const recipe = await fetchRandomRecipe();
-            randoms.push(recipe);
-        }
-        renderRecipes(randoms);
-    }
 
-    function renderRecipes(recipes) {
-        recipeContainer.innerHTML = "";
-        recipes.forEach((recipe) => {
-            const card = document.createElement("div");
-            card.classList.add("recipe-card");
-            card.innerHTML = recipeCardTemplate(recipe);
-            recipeContainer.appendChild(card);
-        });
+        try {
+            const randomRecipes = [];
+            for (let i = 0; i < 4; i++) {
+                const recipe = await fetchRandomRecipe();
+                randomRecipes.push(recipe);
+            }
+
+            renderRecipeList(randomRecipes, recipeContainer);
+        } catch (error) {
+            console.error("Error loading random recipes:", error);
+            recipeContainer.innerHTML = "<p>Could not load random recipes.</p>";
+        }
     }
 
     // Handle search
