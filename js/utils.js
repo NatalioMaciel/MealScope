@@ -25,7 +25,7 @@ export function clearFavorites() {
 
 export function recipeCardTemplate(recipe) {
     return `
-  <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}">
+  <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" loading="lazy">
   <h3>${recipe.strMeal}</h3>
   <p><strong>Category:</strong> ${recipe.strCategory}</p>
   <div class="card-actions">

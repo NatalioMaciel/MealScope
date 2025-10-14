@@ -1,6 +1,5 @@
 import { fetchRecipes, fetchCategories, fetchByCategory, fetchRandomRecipe } from "./services.js";
 import { renderRecipeList } from "./ui.js";
-import { recipeCardTemplate } from "./utils.js"
 
 
 document.addEventListener("DOMContentLoaded", async () => {
