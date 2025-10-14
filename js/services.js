@@ -1,5 +1,5 @@
 const mealdb_base = "https://www.themealdb.com/api/json/v1/1/";
-const nutrition_api_url = "https://api.api-ninjas.com/v1/nutrition";
+const nutrition_url = "https://api.api-ninjas.com/v1/nutrition";
 
 //Search recipes by name
 export async function fetchRecipes(query) {
@@ -32,7 +32,7 @@ export async function fetchNutrition(ingredientList) {
     try {
         const query = ingredientList; // expected to be a short string like "1 cup rice, 2 eggs"
         const response = await fetch(
-            `${nutrition_api_url}?query=${encodeURIComponent(query)}`,
+            `${nutrition_url}?query=${encodeURIComponent(query)}`,
             {
                 headers: {
                     "X-Api-Key": "ydgVSR/ecbUft+FsTHyvSw==B3z7IAqKgkl2LgiQ",

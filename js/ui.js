@@ -1,4 +1,3 @@
-import { recipeCardTemplate } from "./utils.js";
 import { fetchRecipeById, fetchNutrition } from "./services.js";
 import { saveFavorite } from "./utils.js";
 
@@ -28,6 +27,19 @@ export function renderRecipeList(recipes, container) {
 
         container.appendChild(card);
     });
+}
+
+//tampleta for the recipes
+export function recipeCardTemplate(recipe) {
+    return `
+  <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" loading="lazy">
+  <h3>${recipe.strMeal}</h3>
+  <p><strong>Category:</strong> ${recipe.strCategory}</p>
+  <div class="card-actions">
+    <button class="view-btn">View</button>
+    <button class="fav-btn">⭐</button>
+  </div>
+  `;
 }
 
 // Show recipe modal

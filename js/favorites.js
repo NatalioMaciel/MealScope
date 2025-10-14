@@ -1,7 +1,8 @@
 import { loadFavorites, removeFavorite } from "./utils.js";
 import { fetchRecipeById } from "./services.js";
+import { showModal } from "./ui.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("favoritesContainer");
     const favorites = loadFavorites();
 
@@ -28,7 +29,7 @@ function renderFavorites(favorites, container) {
 
         // View details
         card.querySelector(".view-btn").addEventListener("click", () =>
-            showFavoriteModal(recipe.idMeal)
+            showModal(recipe.idMeal)
         );
 
         // Remove from favorites
@@ -51,29 +52,4 @@ function favoriteCardTemplate(recipe) {
   <div class="card-actions">
   </div>
   `;
-}
-
-async function showFavoriteModal(id) {
-    const modal = document.getElementById("recipeModal");
-    const modalDetails = document.getElementById("modalDetails");
-    modal.style.display = "flex";
-    modalDetails.innerHTML = "<p>Loading recipe...</p>";
-
-    try {
-        const recipe = await fetchRecipeById(id);
-        if (!recipe) throw new Error("Recipe not found");
-        modalDetails.innerHTML = `
-      <h2>${recipe.strMeal}</h2>
-      <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" width="300" hight="300">
-      <p><strong>Category:</strong> ${recipe.strCategory}</p>
-      <p><strong>Area:</strong> ${recipe.strArea}</p>
-      <p>${recipe.strInstructions}</p>
-    `;
-    } catch (error) {
-        modalDetails.innerHTML = `<p>Error loading recipe details ${error}.</p>`;
-    }
-
-    document.getElementById("closeModal").addEventListener("click", () => {
-        modal.style.display = "none";
-    });
 }
