@@ -1,17 +1,12 @@
 :root {
-    --primary-color: #E07A5F;
-    /* Rosewood Dust / Muted Terracotta */
-    --secondary-color: #7C8B6F;
-    /* Sage Green / Olive Gray */
+    --primary-color: #1F271B;
+    --secondary-color: #7C7C7C;
     --accent-color: #D4AF37;
-    /* Metallic Gold */
-    --background-color: #FDF8F6;
-    /* Linen / Blush White */
+    --background-color: #ECE4B7;
     --text-color: #2F2F2F;
-    /* Charcoal Gray */
     --text-color2: #FAFAFA;
-    --header-background: #D4AF37;
-    --footer-background: #7C8B6F;
+    --header-background: #7C7C7C;
+    --footer-background: #7C7C7C;
 }
 
 
@@ -45,12 +40,13 @@ body {
     background-color: var(--background-color);
     color: var(--primary-color);
     line-height: 1.6;
+    margin: auto;
 }
 
 .header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     background-color: var(--header-background);
     color: var(--text-color);
     padding: 1rem 2rem;
@@ -98,12 +94,17 @@ body {
     grid-template-columns: 250px 1fr;
     gap: 1.5rem;
     padding: 1.5rem;
+    margin: auto;
+    max-width: 1400px;
 }
 
 .main-fav {
     display: grid;
     gap: 1.5rem;
     padding: 1.5rem;
+    max-width: 80%;
+    margin: auto;
+    max-width: 1400px;
 }
 
 .sidebar {
@@ -141,6 +142,19 @@ body {
 .sort-options button:hover {
     background-color: var(--color-primary);
     color: #fff;
+}
+
+select {
+    text-align: center;
+    height: 30px;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    border-color: var(--primary-color);
+    background-color: var(--footer-background);
+}
+
+.sidebar {
+    order: -1;
 }
 
 .recipes {
@@ -214,7 +228,6 @@ footer {
     background-color: var(--footer-background);
     border-top: 1px solid var(--text-color);
     color: var(--text-color2);
-    margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
