@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             recipeContainer.innerHTML = "<p>Could not load random recipes.</p>";
         }
     }
+    
 
     // Handle search
     searchBtn.addEventListener("click", async () => {

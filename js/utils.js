@@ -22,4 +22,3 @@ export function removeFavorite(idMeal) {
 export function clearFavorites() {
     localStorage.removeItem(favorites_key);
 }
-

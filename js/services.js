@@ -30,9 +30,15 @@ export async function fetchRecipeById(id) {
 //Get nutrition info for ingredients
 export async function fetchNutrition(ingredientList) {
     try {
-        const query = ingredientList; // expected to be a short string like "1 cup rice, 2 eggs"
+        // Join and clean ingredients
+        const query = ingredientList
+            .filter(Boolean)
+            .join(", ")
+            .replace(/\s+/g, " ")
+            .trim();
+
         const response = await fetch(
-            `${nutrition_url}?query=${encodeURIComponent(query)}`,
+            `https://api.api-ninjas.com/v1/nutrition?query=${encodeURIComponent(query)}`,
             {
                 headers: {
                     "X-Api-Key": "ydgVSR/ecbUft+FsTHyvSw==B3z7IAqKgkl2LgiQ",
@@ -42,14 +48,16 @@ export async function fetchNutrition(ingredientList) {
 
         if (!response.ok) {
             const errorText = await response.text();
-            throw new Error(`Nutrition API error: ${errorText}`);
+            console.warn("Nutrition API error:", errorText);
+            return null; // return null to avoid breaking the modal
         }
 
         const data = await response.json();
         return data;
+
     } catch (error) {
         console.error("fetchNutrition:", error);
-        throw new Error("Failed to fetch nutrition data");
+        return null;
     }
 }
 

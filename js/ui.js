@@ -20,10 +20,15 @@ export function renderRecipeList(recipes, container) {
             showModal(recipe.idMeal)
         );
 
-        // Favorite button
-        card.querySelector(".fav-btn").addEventListener("click", () =>
-            saveFavorite(recipe)
-        );
+        // details button
+        const detailButtons = document.querySelectorAll(".recipe");
+        detailButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const id = btn.getAttribute("data-id");
+                // redirect to recipe.html passing the id in the URL
+                window.location.href = `recipe.html?id=${id}`;
+            });
+        });
 
         container.appendChild(card);
     });
@@ -37,7 +42,7 @@ export function recipeCardTemplate(recipe) {
   <p><strong>Category:</strong> ${recipe.strCategory}</p>
   <div class="card-actions">
     <button class="view-btn">View</button>
-    <button class="fav-btn">⭐</button>
+    <button class="recipe" data-id="${recipe.idMeal}">Details</button>
   </div>
   `;
 }
@@ -46,8 +51,11 @@ export function recipeCardTemplate(recipe) {
 export async function showModal(recipeId) {
     const modal = document.getElementById("recipeModal");
     const modalDetails = document.getElementById("modalDetails");
+    const spinner = document.getElementById("loadingSpinner")
+
     modal.style.display = "flex";
-    modalDetails.innerHTML = `<p>Loading recipe...</p>`;
+    modalDetails.innerHTML = "";
+    spinner.classList.remove("hidden");
 
     try {
         const recipe = await fetchRecipeById(recipeId);
@@ -55,39 +63,37 @@ export async function showModal(recipeId) {
 
         // Prepare ingredient list for nutrition query
         const ingredients = [];
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= 20; i++) {
             const ingredient = recipe[`strIngredient${i}`];
             const measure = recipe[`strMeasure${i}`];
-            if (ingredient && ingredient.trim())
+            if (ingredient && ingredient.trim()) {
                 ingredients.push(`${measure} ${ingredient}`);
+            }
         }
 
         // Fetch nutrition info
-        let nutrition = [];
-        try {
-            nutrition = await fetchNutrition(ingredients.slice(0, 3).join(", "));
-        } catch {
-            nutrition = null;
-        }
+        const nutrition = await fetchNutrition(ingredients.slice(0, 7));
+
+
+        spinner.classList.add("hidden");
 
         modalDetails.innerHTML = `
-      <h2>${recipe.strMeal}</h2>
-      <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" width="300" hight="300"">
-      <p><strong>Category:</strong> ${recipe.strCategory}</p>
-      <p><strong>Area:</strong> ${recipe.strArea}</p>
-      <p>${recipe.strInstructions}</p>
-      <h3>Nutrition Info</h3>
-      ${nutrition && nutrition.length
-                ? `<ul>${nutrition
-                    .map(
-                        (n) =>
-                            `<li>${n.name}: ${n.calories} kcal, Protein: ${n.protein_g}g, Carbs: ${n.carbohydrates_total_g}g</li>`
-                    )
-                    .join("")}</ul>`
+        <h2>${recipe.strMeal}</h2>
+        <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" width="300" height="300">
+        <p><strong>Category:</strong> ${recipe.strCategory}</p>
+        <p><strong>Area:</strong> ${recipe.strArea}</p>
+        <p>${ingredients}</p>
+        <h3>Nutrition Info</h3>
+        ${nutrition && nutrition.length
+                ? `<ul>${nutrition.map(n => `
+                    <li>${n.name}: ${n.calories} kcal, Protein: ${n.protein_g}g, Carbs: ${n.carbohydrates_total_g}g</li>`
+                ).join("")}</ul>`
                 : `<p>Nutrition information not available.</p>`
             }
-    `;
+        `;
+        console.log("Ingredients sent:", ingredients.slice(0, 7).join(", "));
     } catch (error) {
+        spinner.classList.add("hidden");
         modalDetails.innerHTML = `<p>Error loading recipe details. ${error}</p>`;
     }
 

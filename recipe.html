@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Details | MealScope</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <script type="module" src="js/recipe.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="images/logowhite1.png" alt="">
+            <a href="index.html">
+                <h1>MealScope</h1>
+            </a>
+        </div>
+        <button id="favoriteBtn" class="fav-btn">♡ Add to Favorites</button>
+    </header>
+
+    <main id="recipeContainer" class="recipe-container">
+        <h1 id="recipeTitle">Loading...</h1>
+        <div class="recipe-image-section">
+            <img id="recipeImage" alt="Recipe image">
+            <p id="recipeCategory"></p>
+        </div>
+
+        <section class="recipe-info">
+            <h2>Ingredients</h2>
+            <ul id="ingredientsList" class="ingredients-list"></ul>
+
+            <h2>Instructions</h2>
+            <p id="recipeInstructions"></p>
+        </section>
+
+        <section class="nutrition-section">
+            <h2>Nutrition Information</h2>
+            <div id="nutritionInfo" class="nutrition-info">
+                <p>Loading nutrition data...</p>
+            </div>
+        </section>
+        <div class="recipe-links">
+            <a id="youtubeLink" href="#" target="_blank" class="link-btn">🎥 Watch on YouTube</a>
+            <a id="sourceLink" href="#" target="_blank" class="link-btn">📄 View Source</a>
+        </div>
+    </main>
+</body>
+
+</html>
