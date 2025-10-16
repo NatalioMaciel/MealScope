@@ -53,7 +53,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     
 
-    // Handle search
     searchBtn.addEventListener("click", async () => {
         const query = searchInput.value.trim();
         if (!query) return;

@@ -74,7 +74,7 @@ function renderPlanner(plan, container, favorites) {
         container.appendChild(section);
     });
 
-    // Add button listeners
+    
     document.querySelectorAll(".add-btn").forEach(btn => {
         btn.addEventListener("click", e => {
             const day = e.target.dataset.day;
@@ -89,7 +89,7 @@ function renderPlanner(plan, container, favorites) {
         });
     });
 
-    // Remove recipe
+    
     document.querySelectorAll(".remove-btn").forEach(btn => {
         btn.addEventListener("click", e => {
             const { id, day } = e.target.dataset;
@@ -99,11 +99,10 @@ function renderPlanner(plan, container, favorites) {
         });
     });
 
-    // 🔗 View recipe button
+    
     document.querySelectorAll(".planner-btn").forEach(btn => {
         btn.addEventListener("click", e => {
             const id = e.target.dataset.id;
-            // Redirect to your existing recipe details page
             window.location.href = `recipe.html?id=${id}`;
         });
     });
