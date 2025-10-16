@@ -1,7 +1,6 @@
 const mealdb_base = "https://www.themealdb.com/api/json/v1/1/";
 const nutrition_url = "https://api.api-ninjas.com/v1/nutrition";
 
-//Search recipes by name
 export async function fetchRecipes(query) {
     try {
         const res = await fetch(`${mealdb_base}search.php?s=${encodeURIComponent(query)}`);
@@ -14,7 +13,6 @@ export async function fetchRecipes(query) {
     }
 }
 
-//Get recipe details by ID
 export async function fetchRecipeById(id) {
     try {
         const res = await fetch(`${mealdb_base}lookup.php?i=${encodeURIComponent(id)}`);
@@ -27,10 +25,8 @@ export async function fetchRecipeById(id) {
     }
 }
 
-//Get nutrition info for ingredients
 export async function fetchNutrition(ingredientList) {
     try {
-        // Join and clean ingredients
         const query = ingredientList
             .filter(Boolean)
             .join(", ")
@@ -49,7 +45,7 @@ export async function fetchNutrition(ingredientList) {
         if (!response.ok) {
             const errorText = await response.text();
             console.warn("Nutrition API error:", errorText);
-            return null; // return null to avoid breaking the modal
+            return null;
         }
 
         const data = await response.json();
@@ -61,7 +57,6 @@ export async function fetchNutrition(ingredientList) {
     }
 }
 
-//Fetch list of categories
 export async function fetchCategories() {
     try {
         const res = await fetch(`${mealdb_base}list.php?c=list`);
@@ -74,7 +69,6 @@ export async function fetchCategories() {
     }
 }
 
-//Fetch recipes by category
 export async function fetchByCategory(category) {
     try {
         const res = await fetch(`${mealdb_base}filter.php?c=${encodeURIComponent(category)}`);
@@ -87,7 +81,6 @@ export async function fetchByCategory(category) {
     }
 }
 
-//Fetch a random recipe
 export async function fetchRandomRecipe() {
     try {
         const res = await fetch(`${mealdb_base}random.php`);
