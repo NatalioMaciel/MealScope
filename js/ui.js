@@ -82,7 +82,7 @@ export async function showModal(recipeId) {
         <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" width="300" height="300">
         <p><strong>Category:</strong> ${recipe.strCategory}</p>
         <p><strong>Area:</strong> ${recipe.strArea}</p>
-        <p>${ingredients}</p>
+        <p><strong>Ingredients:</strong>${ingredients}</p>
         <h3>Nutrition Info</h3>
         ${nutrition && nutrition.length
                 ? `<ul>${nutrition.map(n => `
